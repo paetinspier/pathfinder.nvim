@@ -1,6 +1,6 @@
 local M = {}
 
-function start()
+function M.start()
     local lines = {
         "Hello from a Neovim Floating Window!",
         "------------------------------------",
@@ -29,3 +29,5 @@ function start()
 
 	vim.api.nvim_buf_set_keymap(buf, 'n', 'q', ':close<CR>', { noremap = true, silent = true })
 end
+
+return M
