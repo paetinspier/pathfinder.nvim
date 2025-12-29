@@ -12,7 +12,7 @@ function M.startPathfinder()
 	vim.api.nvim_set_current_buf(buf)
 end
 
-vim.api.nvim_buf_create_user_command(0, "Pathfinder", function()
+vim.api.nvim_create_user_command("Pathfinder", function()
 	M.startPathfinder()
 end, { desc = "Starting Pathfinder" })
 
