@@ -1,5 +1,13 @@
 local M = {}
 
+--- Configures the plugin buffer settings
+--- @param buf integer Buffer id
+function configureSettings(buf)
+	vim.keymap.set("n", "q", function()
+		vim.api.nvim_win_close(buf, true)
+	end, {})
+end
+
 function M.startPathfinder()
 	local buf = vim.api.nvim_create_buf(false, true)
 	local width = math.floor(vim.o.columns * .5)
