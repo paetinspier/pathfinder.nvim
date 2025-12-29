@@ -2,10 +2,13 @@ local M = {}
 
 --- Configures the plugin buffer settings
 --- @param buf integer Buffer id
-function configureSettings(buf)
-	vim.keymap.set("n", "q", function()
-		vim.api.nvim_win_close(buf, true)
-	end, {})
+--- @param win integer Window id
+function ConfigureSettings(buf, win)
+	local function close()
+		vim.api.nvim_win_close(win, true)
+	end
+	vim.api.nvim_buf_set_keymap(buf, 'n', '<Esc>', '', { noremap = true, silent = true, callback = close })
+	vim.api.nvim_buf_set_keymap(buf, 'n', 'q', '', { noremap = true, silent = true, callback = close })
 end
 
 function M.startPathfinder()
@@ -14,10 +17,10 @@ function M.startPathfinder()
 	local height = math.floor(vim.o.lines * .5)
 	local row = math.floor(height / 2)
 	local col = math.floor(width / 2)
-
-	vim.api.nvim_open_win(buf, true,
+	local win = vim.api.nvim_open_win(buf, true,
 		{ relative = 'editor', row = row, col = col, width = width, height = height })
-	vim.api.nvim_set_current_buf(buf)
+
+	ConfigureSettings(buf, win)
 end
 
 vim.api.nvim_create_user_command("Pathfinder", function()
