@@ -1,7 +1,8 @@
 local M = {}
 
 function M.startPathfinder()
-	vim.api.nvim_open_win(0, false,
+	local buf = vim.api.nvim_create_buf()
+	vim.api.nvim_open_win(buf, false,
 		{ relative = 'win', row = 3, col = 3, width = 12, height = 3 })
 end
 
